@@ -3,8 +3,10 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// The editor creator to use.
+// The base editor
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+
+// Plugins
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
@@ -32,7 +34,8 @@ import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 
-import CKContext from '@ckeditor/ckeditor5-core/src/context';
+// Context
+import Context from '@ckeditor/ckeditor5-core/src/context';
 
 const BASE_PLUGINS = [
 	Autoformat,
@@ -67,7 +70,7 @@ const INTERACTIVE_PLUGINS = [
 	RealTimeCollaborativeTrackChanges
 ];
 
-export const BASE_CONFIG = {
+const BASE_CONFIG = {
 	toolbar: {
 		items: [
 			'heading',
@@ -108,7 +111,7 @@ export const BASE_CONFIG = {
 	language: 'en'
 };
 
-export const INTERACTIVE_CONFIG = {
+const INTERACTIVE_CONFIG = {
 	...BASE_CONFIG,
 	cloudServices: {
 		// supply these values in the context
@@ -118,21 +121,24 @@ export const INTERACTIVE_CONFIG = {
 	}
 }
 
-export default class CredibleEditor extends ClassicEditor {}
+class Standalone extends ClassicEditor {}
 
 // Plugins to include in the build.
-CredibleEditor.builtinPlugins = [...BASE_PLUGINS];
+Standalone.builtinPlugins = [...BASE_PLUGINS];
 
 // Editor configuration.
-CredibleEditor.defaultConfig = {...BASE_CONFIG};
+Standalone.defaultConfig = {...BASE_CONFIG};
 
-export class InteractiveCredibleEditor extends ClassicEditor {}
+class Interactive extends ClassicEditor {}
 
 // Plugins to include in the build.
-InteractiveCredibleEditor.builtinPlugins = [...INTERACTIVE_PLUGINS];
+Interactive.builtinPlugins = [...INTERACTIVE_PLUGINS];
 
 // Editor configuration.
-InteractiveCredibleEditor.defaultConfig = {...INTERACTIVE_CONFIG};
+Interactive.defaultConfig = {...INTERACTIVE_CONFIG};
 
-// and the Context object to be shared.
-export const Context = CKContext;
+export default {
+	Standalone,
+	Interactive,
+	Context
+}

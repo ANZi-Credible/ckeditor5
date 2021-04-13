@@ -28,9 +28,7 @@
 
 <script src="../build/ckeditor.js"></script>
 <script>
-	console.debug('CredibleEditor', CredibleEditor)
-
-	CredibleEditor.create( document.querySelector( '#editor' ) )
+	CredibleEditor.Standalone.create( document.querySelector( '#editor' ) )
 		.then( editor => {
 			window.editor = editor;
 		} )

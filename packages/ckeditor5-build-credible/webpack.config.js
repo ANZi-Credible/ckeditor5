@@ -22,7 +22,6 @@ module.exports = {
 	output: {
 		// The name under which the editor will be exported.
 		library: 'CredibleEditor',
-
 		path: path.resolve( __dirname, 'build' ),
 		filename: 'ckeditor.js',
 		libraryTarget: 'umd',
@@ -48,8 +47,9 @@ module.exports = {
 		new CKEditorWebpackPlugin( {
 			// UI language. Language codes follow the https://en.wikipedia.org/wiki/ISO_639-1 format.
 			// When changing the built-in language, remember to also change it in the editor's configuration (src/ckeditor.js).
-			language: 'en',
-			additionalLanguages: 'all'
+			language: 'en'
+			// This option can be set to an array of language codes or 'all' to build all found languages. The bundle is optimized for one language when this option is omitted.
+			// additionalLanguages: 'all'
 		} ),
 		new webpack.BannerPlugin( {
 			banner: bundler.getLicenseBanner(),
